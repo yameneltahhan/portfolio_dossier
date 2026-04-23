@@ -1,9 +1,6 @@
-Portfolio prêt à ouvrir
+Portfolio prêt à être consulté :
 
-1. Ouvrez le dossier.
-2. Double-cliquez sur index.html.
-3. Pour changer la photo, remplacez simplement le fichier 'profil.jpg' par votre photo en gardant exactement le même nom.
+1. Téléchargez le repository
+2. Ouvrez le dossier
+3. Double-cliquez sur le fichier "index.html"
 
-Pour publier en ligne facilement :
-- Netlify Drop : glissez-déposez ce dossier ou le fichier index.html + profil.jpg
-- GitHub Pages : possible aussi plus tard
