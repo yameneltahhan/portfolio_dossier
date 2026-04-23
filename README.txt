@@ -1,6 +1,3 @@
-Portfolio prêt à être consulté :
+Portfolio prêt à être consulté sur le lien : https://yameneltahhan.github.io/portfolio_dossier/
 
-1. Téléchargez le repository
-2. Ouvrez le dossier
-3. Double-cliquez sur le fichier "index.html"
 
