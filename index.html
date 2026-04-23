@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Mohamed-Yamen EL TAHHAN</title>
+  <meta name="description" content="Portfolio de Mohamed-Yamen EL TAHHAN - UX/UI Designer, Développeur Web, profil hybride MIAGE." />
+  <style>
+    :root{
+      --bg-top:#cfe6ff;
+      --bg-mid:#e9f4ff;
+      --bg-bottom:#fff1b8;
+      --text:#1f2a44;
+      --muted:#56647f;
+      --card:rgba(255,255,255,.72);
+      --card-strong:rgba(255,255,255,.84);
+      --line:rgba(255,255,255,.65);
+      --accent:#16315f;
+      --accent-soft:#edf5ff;
+      --shadow:0 18px 45px rgba(47,76,135,.12);
+      --radius-xl:30px;
+      --radius-lg:22px;
+      --radius-md:16px;
+      --max:1200px;
+    }
+
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        linear-gradient(180deg,var(--bg-top) 0%, var(--bg-mid) 38%, var(--bg-bottom) 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    body::before,
+    body::after{
+      content:"";
+      position:fixed;
+      inset:auto;
+      width:36rem;
+      height:36rem;
+      filter:blur(70px);
+      opacity:.35;
+      z-index:-2;
+      pointer-events:none;
+      animation: floatGlow 14s ease-in-out infinite alternate;
+    }
+    body::before{
+      top:-8rem; left:-8rem;
+      background:radial-gradient(circle, rgba(139,190,255,.75), transparent 60%);
+    }
+    body::after{
+      right:-8rem; bottom:-8rem;
+      background:radial-gradient(circle, rgba(255,230,133,.8), transparent 60%);
+      animation-delay:2s;
+    }
+    .orb{
+      position:fixed;
+      width:25rem; height:25rem;
+      border-radius:999px;
+      filter:blur(85px);
+      opacity:.22;
+      z-index:-2;
+      pointer-events:none;
+      background:radial-gradient(circle, rgba(255,255,255,.95), transparent 65%);
+      top:26%;
+      left:34%;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatGlow{
+      from{ transform:translate3d(0,0,0) scale(1); }
+      to{ transform:translate3d(40px,20px,0) scale(1.08); }
+    }
+    @keyframes drift{
+      from{ transform:translate3d(-25px,-10px,0); }
+      to{ transform:translate3d(45px,30px,0); }
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    img{ max-width:100%; display:block; }
+
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .nav{
+      position:sticky;
+      top:12px;
+      z-index:10;
+      margin:18px auto 0;
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:14px 18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+      backdrop-filter:blur(16px);
+      border-radius:999px;
+      box-shadow:var(--shadow);
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.2px;
+    }
+    .brand-badge{
+      width:42px; height:42px; border-radius:14px;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg,#fff,#e7f2ff);
+      border:1px solid rgba(255,255,255,.85);
+      box-shadow:0 10px 22px rgba(55,89,150,.12);
+    }
+    .nav-links{
+      display:flex; gap:18px; flex-wrap:wrap; justify-content:flex-end;
+      font-size:14px; color:var(--muted);
+    }
+    .nav-links a{
+      padding:10px 14px; border-radius:999px;
+    }
+    .nav-links a:hover{ background:rgba(255,255,255,.65); color:var(--accent); }
+
+    .hero{
+      padding:42px 0 24px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.2fr .9fr;
+      gap:46px;
+      align-items:center;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:12px 18px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.56);
+      backdrop-filter:blur(12px);
+      box-shadow:0 10px 24px rgba(68,100,160,.08);
+      color:var(--muted);
+      font-size:14px;
+      font-weight:600;
+    }
+
+    h1{
+      font-size:clamp(2.8rem, 7vw, 5.2rem);
+      line-height:.98;
+      margin:22px 0 18px;
+      letter-spacing:-.04em;
+    }
+    .subtitle{
+      font-size:clamp(1.15rem, 2.2vw, 1.7rem);
+      color:#48658f;
+      margin-bottom:18px;
+    }
+    .lead{
+      color:var(--muted);
+      font-size:1.16rem;
+      line-height:1.9;
+      max-width:760px;
+    }
+
+    .hero-tags,
+    .lang-tags{
+      display:flex; flex-wrap:wrap; gap:12px;
+      margin-top:26px;
+    }
+    .tag{
+      padding:13px 18px;
+      border-radius:999px;
+      background:rgba(255,255,255,.66);
+      border:1px solid var(--line);
+      box-shadow:0 8px 20px rgba(68,100,160,.08);
+      font-weight:700;
+      color:#44526b;
+    }
+    .tag.primary{
+      background:#0f2348;
+      color:white;
+      border-color:#0f2348;
+      box-shadow:0 14px 30px rgba(13,31,72,.24);
+    }
+
+    .photo-wrap{
+      position:relative;
+      max-width:380px;
+      margin-left:auto;
+    }
+    .photo-glow{
+      position:absolute; inset:-18px;
+      background:linear-gradient(135deg, rgba(255,238,160,.55), rgba(196,225,255,.58));
+      border-radius:34px;
+      filter:blur(26px);
+      z-index:0;
+    }
+    .photo-card{
+      position:relative;
+      z-index:1;
+      border:1px solid rgba(255,255,255,.82);
+      background:rgba(255,255,255,.78);
+      backdrop-filter:blur(14px);
+      border-radius:28px;
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+    .photo-card img{
+      width:100%;
+      aspect-ratio: 4 / 5;
+      object-fit:cover;
+      object-position:center top;
+      border-radius:18px;
+    }
+
+    .section{
+      padding:24px 0;
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:22px;
+    }
+
+    .card{
+      border:1px solid rgba(255,255,255,.78);
+      background:var(--card);
+      backdrop-filter:blur(14px);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow);
+      padding:30px;
+    }
+    .card h2{
+      margin:0 0 14px;
+      font-size:2rem;
+      letter-spacing:-.03em;
+    }
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.9;
+      font-size:1.04rem;
+    }
+
+    .contact{
+      background:linear-gradient(135deg, rgba(224,242,255,.92), rgba(255,244,194,.92));
+      border-color:rgba(170,206,255,.9);
+    }
+    .contact-list{
+      display:grid;
+      gap:14px;
+      margin-top:18px;
+      color:#465876;
+      font-weight:600;
+    }
+
+    .section-head{
+      margin-bottom:18px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:2.1rem;
+      letter-spacing:-.03em;
+    }
+    .section-head p{
+      margin:10px 0 0;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    .skills-grid{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:18px;
+    }
+    .skill-card{
+      border:1px solid rgba(255,255,255,.78);
+      background:var(--card);
+      backdrop-filter:blur(14px);
+      border-radius:26px;
+      box-shadow:var(--shadow);
+      padding:24px;
+    }
+    .skill-card h3{
+      margin:0 0 16px;
+      font-size:1.15rem;
+    }
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .chip{
+      padding:9px 12px;
+      border-radius:999px;
+      background:rgba(248,251,255,.9);
+      border:1px solid rgba(220,234,251,.95);
+      color:#42526b;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+    }
+    .project-card{
+      border:1px solid rgba(255,255,255,.8);
+      background:var(--card-strong);
+      backdrop-filter:blur(15px);
+      border-radius:26px;
+      box-shadow:var(--shadow);
+      padding:24px;
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .project-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 22px 45px rgba(47,76,135,.16);
+    }
+    .project-cat{
+      color:#6c7c98;
+      font-weight:700;
+      font-size:13px;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+    .project-card h3{
+      margin:10px 0 8px;
+      font-size:1.28rem;
+      line-height:1.3;
+      letter-spacing:-.02em;
+    }
+    .project-period{
+      color:#7c8aa3;
+      font-size:14px;
+      margin-bottom:14px;
+    }
+    .project-card p{
+      color:var(--muted);
+      line-height:1.78;
+      margin:0;
+    }
+    .project-card ul{
+      padding-left:0;
+      list-style:none;
+      margin:16px 0 0;
+      display:grid;
+      gap:10px;
+    }
+    .project-card li{
+      display:flex;
+      gap:10px;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:14px;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:999px;
+      background:#9fc9ff;
+      margin-top:8px;
+      flex:0 0 auto;
+    }
+    footer{
+      padding:32px 0 52px;
+      color:#5b6882;
+      text-align:center;
+      font-size:14px;
+    }
+
+    @media (max-width: 1100px){
+      .hero-grid,
+      .grid-2,
+      .skills-grid,
+      .projects-grid{
+        grid-template-columns:1fr 1fr;
+      }
+      .photo-wrap{ margin:0 auto; }
+    }
+
+    @media (max-width: 760px){
+      .nav-inner{
+        border-radius:26px;
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .hero-grid,
+      .grid-2,
+      .skills-grid,
+      .projects-grid{
+        grid-template-columns:1fr;
+      }
+      .hero{ padding-top:24px; }
+      .card, .skill-card, .project-card{ padding:22px; }
+      h1{ max-width:12ch; }
+    }
+  </style>
+</head>
+<body>
+  <div class="orb" aria-hidden="true"></div>
+
+  <div class="container nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="brand-badge">MY</div>
+        <div>Portfolio</div>
+      </div>
+      <div class="nav-links">
+        <a href="#apropos">À propos</a>
+        <a href="#competences">Compétences</a>
+        <a href="#projets">Projets</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="pill">Portfolio · UX/UI · Développement web · Bases de données</div>
+          <h1>Mohamed-Yamen EL TAHHAN</h1>
+          <div class="subtitle">UX/UI Designer · Développeur Web · Profil hybride MIAGE</div>
+          <p class="lead">
+            Étudiant en Licence 3 MIAGE à l’Université de Lorraine, je développe un profil hybride entre
+            expérience utilisateur, développement web et systèmes d’information. J’aime concevoir des
+            interfaces utiles, claires et esthétiques, tout en gardant une logique technique solide.
+          </p>
+
+          <div class="hero-tags">
+            <div class="tag primary">Recherche de stage</div>
+            <div class="tag">Disponible immédiatement</div>
+            <div class="tag">Nancy · mobilité jusqu’à 500 km</div>
+          </div>
+
+          <div class="lang-tags">
+            <div class="tag">Français C1</div>
+            <div class="tag">Anglais B1</div>
+            <div class="tag">Arabe C2</div>
+          </div>
+        </div>
+
+        <div class="photo-wrap">
+          <div class="photo-glow"></div>
+          <div class="photo-card">
+            <img src="profil.jpg" alt="Photo de Mohamed-Yamen EL TAHHAN" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="apropos">
+      <div class="grid-2">
+        <div class="card">
+          <h2>À propos</h2>
+          <p>
+            Mon parcours en MIAGE m’a permis de construire une base solide en informatique, en bases de
+            données et en systèmes d’information, tout en développant un fort intérêt pour l’UX/UI design et
+            la création d’interfaces numériques. J’aime comprendre un besoin, analyser les points de friction,
+            structurer une solution puis la transformer en prototype ou en réalisation concrète.
+          </p>
+        </div>
+
+        <div class="card contact" id="contact">
+          <h2>Contact</h2>
+          <div class="contact-list">
+            <div>📍 Nancy, France</div>
+            <div>📞 07.80.79.65.92</div>
+            <div>✉️ eltahhanyamen2@gmail.com</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="competences">
+      <div class="section-head">
+        <h2>Compétences</h2>
+        <p>Un profil qui relie design, développement et structuration de l’information.</p>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>UX / UI Design</h3>
+          <div class="chips">
+            <span class="chip">Figma</span>
+            <span class="chip">Tests utilisateurs</span>
+            <span class="chip">Évaluation heuristique</span>
+            <span class="chip">Architecture de l’information</span>
+            <span class="chip">Wireframing</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Développement</h3>
+          <div class="chips">
+            <span class="chip">HTML</span>
+            <span class="chip">CSS</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">Java</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip">Angular</span>
+            <span class="chip">Spring Boot</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Bases de données / SI</h3>
+          <div class="chips">
+            <span class="chip">SQL</span>
+            <span class="chip">MySQL</span>
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">MariaDB</span>
+            <span class="chip">MERISE</span>
+            <span class="chip">Systèmes d’information</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Outils</h3>
+          <div class="chips">
+            <span class="chip">Word</span>
+            <span class="chip">Excel</span>
+            <span class="chip">PowerPoint</span>
+            <span class="chip">WordPress</span>
+            <span class="chip">Elementor</span>
+            <span class="chip">R</span>
+            <span class="chip">GitHub</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projets">
+      <div class="section-head">
+        <h2>Projets</h2>
+        <p>Quelques réalisations entre UX, UI, développement web et bases de données.</p>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-cat">UX / Ergonomie</div>
+          <h3>Analyse UX du site Edolang</h3>
+          <div class="project-period">Projet universitaire · Équipe de 5</div>
+          <p>Analyse ergonomique d’un site éducatif avec une démarche UX complète pour identifier les points de friction et proposer une interface plus claire et plus intuitive.</p>
+          <ul>
+            <li><span class="dot"></span><span>Évaluation heuristique avec Scapin & Bastien</span></li>
+            <li><span class="dot"></span><span>Test des 5 secondes et tri par cartes</span></li>
+            <li><span class="dot"></span><span>Recommandations UX et maquette sur Figma</span></li>
+            <li><span class="dot"></span><span>Projet valorisé avec mention Bien</span></li>
+          </ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-cat">UX/UI + Développement web</div>
+          <h3>Site vitrine pour un fleuriste</h3>
+          <div class="project-period">Stage de 2 mois · Projet individuel</div>
+          <p>Conception UX/UI puis développement d’un site web pour une boutique de fleuriste, avec une attention portée à la mise en valeur des produits et à la clarté de navigation.</p>
+          <ul>
+            <li><span class="dot"></span><span>Analyse des besoins client et structuration des pages</span></li>
+            <li><span class="dot"></span><span>Maquettes UX/UI sur Figma</span></li>
+            <li><span class="dot"></span><span>Développement en HTML, CSS et JavaScript</span></li>
+            <li><span class="dot"></span><span>Livraison d’une interface claire et fonctionnelle</span></li>
+          </ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-cat">UX Design</div>
+          <h3>Refonte UX d’un site d’archéologie</h3>
+          <div class="project-period">Projet personnel · Autonomie</div>
+          <p>Projet réalisé en autonomie pour renforcer mes compétences en UX design à travers l’analyse, les tests utilisateurs et la refonte ergonomique d’un site existant.</p>
+          <ul>
+            <li><span class="dot"></span><span>Tests des 5 secondes</span></li>
+            <li><span class="dot"></span><span>Évaluations heuristiques et réflexion sur l’accessibilité</span></li>
+            <li><span class="dot"></span><span>Travail sur l’architecture de l’information</span></li>
+            <li><span class="dot"></span><span>Conception des maquettes sur Figma</span></li>
+          </ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-cat">Développement web</div>
+          <h3>Kaijupedia · Game Jam</h3>
+          <div class="project-period">48h · Équipe de 5 étudiants</div>
+          <p>Création d’un jeu web dans le cadre d’une Game Jam universitaire autour de l’univers Kaiju, avec un travail intensif de conception, de développement et de collaboration en temps limité.</p>
+          <a href="https://github.com/Mariyem23/Game-jam.git" target="_blank" class="github-link">
+            🔗 Voir le projet sur GitHub
+          </a>
+          <ul>
+            <li><span class="dot"></span><span>Développement du jeu en HTML, CSS et JavaScript</span></li>
+            <li><span class="dot"></span><span>Production réalisée en 48 heures</span></li>
+            <li><span class="dot"></span><span>2e place parmi 10 équipes</span></li>
+            <li><span class="dot"></span><span>Expérience forte en créativité et travail d’équipe</span></li>
+          </ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-cat">Base de données / SI</div>
+          <h3>Base de données · Service de vélos</h3>
+          <div class="project-period">Projet universitaire · Équipe de 3</div>
+          <p>Conception et mise en place d’une base de données relationnelle pour gérer un service de vélos en libre-service, de l’analyse du besoin jusqu’à l’implémentation technique.</p>
+          <ul>
+            <li><span class="dot"></span><span>Conception MCD, MLD et MPD</span></li>
+            <li><span class="dot"></span><span>Implémentation sous MariaDB</span></li>
+            <li><span class="dot"></span><span>Création des tables, clés et relations</span></li>
+            <li><span class="dot"></span><span>Rédaction et test de requêtes SQL</span></li>
+          </ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-cat">Base de données / SI</div>
+          <h3>Base de données · Communication audiovisuelle</h3>
+          <div class="project-period">Projet universitaire · Individuel</div>
+          <p>Conception d’une base de données relationnelle complète sous PostgreSQL pour une entreprise de communication audiovisuelle, avec une logique de structuration, de cohérence et d’optimisation.</p>
+          <ul>
+            <li><span class="dot"></span><span>Analyse du besoin métier</span></li>
+            <li><span class="dot"></span><span>Conception MCD, MLD et MPD</span></li>
+            <li><span class="dot"></span><span>Implémentation sous PostgreSQL</span></li>
+            <li><span class="dot"></span><span>Utilisation de vues, index, triggers et procédures</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Portfolio de Mohamed-Yamen EL TAHHAN · UX/UI · Développement web · Bases de données
+  </footer>
+</body>
+</html>
