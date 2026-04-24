@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projet Fleuristerie · Portfolio Mohamed-Yamen</title>
+
+    <style>
+        :root {
+            --blue: #d7ebff;
+            --blue-dark: #173b6c;
+            --yellow: #fff1b8;
+            --yellow-soft: #fff8dc;
+            --cream: #fffdf5;
+            --text: #1f2937;
+            --muted: #5b6472;
+            --white: rgba(255, 255, 255, 0.76);
+            --shadow: 0 18px 45px rgba(40, 65, 95, 0.16);
+            --radius: 28px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, Arial, sans-serif;
+            color: var(--text);
+            background: linear-gradient(180deg, var(--blue) 0%, #eef7ff 42%, var(--yellow) 100%);
+            overflow-x: hidden;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.55;
+            pointer-events: none;
+            z-index: -1;
+            animation: float 9s ease-in-out infinite alternate;
+        }
+
+        body::before {
+            background: #a9d5ff;
+            top: -120px;
+            left: -110px;
+        }
+
+        body::after {
+            background: #ffe98f;
+            right: -110px;
+            bottom: -130px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            from {
+                transform: translate(0, 0) scale(1);
+            }
+
+            to {
+                transform: translate(35px, 25px) scale(1.08);
+            }
+        }
+
+        .container {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .nav {
+            position: sticky;
+            top: 14px;
+            z-index: 20;
+            width: min(1120px, calc(100% - 32px));
+            margin: 14px auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.75);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.58);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 10px 30px rgba(50, 70, 90, 0.08);
+        }
+
+        .brand {
+            font-weight: 800;
+            color: var(--blue-dark);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 650;
+            padding: 9px 12px;
+            border-radius: 999px;
+            transition: 0.25s ease;
+        }
+
+        .nav a:hover {
+            background: rgba(215, 235, 255, 0.8);
+            color: var(--blue-dark);
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 44px;
+            align-items: center;
+            padding: 82px 0 58px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.68);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 22px rgba(35, 65, 90, 0.08);
+            color: var(--blue-dark);
+            font-weight: 700;
+            font-size: 0.92rem;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            background: #5aaeff;
+            border-radius: 50%;
+            box-shadow: 0 0 0 6px rgba(90, 174, 255, 0.14);
+        }
+
+        h1 {
+            margin-top: 22px;
+            font-size: clamp(2.45rem, 6vw, 5rem);
+            line-height: 1;
+            letter-spacing: -0.06em;
+            color: #10233f;
+        }
+
+        .hero p {
+            margin-top: 22px;
+            max-width: 650px;
+            color: var(--muted);
+            line-height: 1.9;
+            font-size: 1.06rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 16px;
+            padding: 13px 18px;
+            font-weight: 750;
+            transition: 0.25s ease;
+        }
+
+        .btn.primary {
+            color: white;
+            background: #143a6b;
+            box-shadow: 0 12px 24px rgba(20, 58, 107, 0.22);
+        }
+
+        .btn.secondary {
+            color: #143a6b;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .hero-preview {
+            position: relative;
+            border-radius: 34px;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.62);
+            border: 1px solid rgba(255, 255, 255, 0.78);
+            box-shadow: var(--shadow);
+            transform: rotate(1deg);
+            transition: 0.35s ease;
+        }
+
+        .hero-preview:hover {
+            transform: rotate(0deg) translateY(-6px);
+        }
+
+        .hero-preview img {
+            width: 100%;
+            display: block;
+            border-radius: 24px;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .section {
+            margin: 42px 0;
+            padding: 34px;
+            border-radius: var(--radius);
+            background: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(18px);
+            animation: reveal linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 28%;
+        }
+
+        @keyframes reveal {
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .section-title span {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--blue), var(--yellow-soft));
+            color: var(--blue-dark);
+            font-weight: 900;
+        }
+
+        h2 {
+            color: #14223a;
+            font-size: clamp(1.55rem, 3vw, 2.2rem);
+            letter-spacing: -0.03em;
+        }
+
+        h3 {
+            color: #17243b;
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        p,
+        li {
+            color: var(--muted);
+            line-height: 1.85;
+        }
+
+        .two-cols {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .two-cols.reverse {
+            grid-template-columns: 1.1fr 0.9fr;
+        }
+
+        .image-card {
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(20, 35, 58, 0.16);
+            background: white;
+        }
+
+        .image-card img {
+            width: 100%;
+            display: block;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            transition: transform 0.45s ease;
+        }
+
+        .image-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 24px;
+        }
+
+        .mini-card {
+            padding: 22px;
+            border-radius: 24px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.8), rgba(255, 248, 220, 0.75));
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 14px 28px rgba(40, 65, 95, 0.1);
+            transition: 0.28s ease;
+        }
+
+        .mini-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .mini-card strong {
+            display: block;
+            color: var(--blue-dark);
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .gallery figure {
+            overflow: hidden;
+            border-radius: 28px;
+            background: white;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.45s ease;
+        }
+
+        .gallery figure:hover img {
+            transform: scale(1.04);
+        }
+
+        .gallery figcaption {
+            position: absolute;
+            left: 14px;
+            right: 14px;
+            bottom: 14px;
+            padding: 12px 14px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(12px);
+            color: #173b6c;
+            font-weight: 800;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 52px 1fr;
+            gap: 14px;
+            align-items: start;
+        }
+
+        .step-num {
+            width: 42px;
+            height: 42px;
+            border-radius: 15px;
+            background: #143a6b;
+            color: white;
+            display: grid;
+            place-items: center;
+            font-weight: 900;
+            box-shadow: 0 10px 20px rgba(20, 58, 107, 0.2);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 26px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 36px 20px 46px;
+            color: #5f6c7b;
+        }
+
+        @media (max-width: 860px) {
+            .nav {
+                align-items: flex-start;
+                border-radius: 24px;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                justify-content: flex-start;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 46px 0 28px;
+            }
+
+            .hero-preview {
+                max-width: 420px;
+                margin: 0 auto;
+                transform: none;
+            }
+
+            .two-cols,
+            .two-cols.reverse {
+                grid-template-columns: 1fr;
+            }
+
+            .cards-grid,
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 24px;
+            }
+        }
+
+        @media (max-width: 520px) {
+
+            .container,
+            .nav {
+                width: min(100% - 22px, 1120px);
+            }
+
+            .hero-actions,
+            .project-links {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .section {
+                border-radius: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="brand">MY · Projet Fleuristerie</div>
+        <div class="nav-links">
+            <a href="index.html">Portfolio</a>
+            <a href="#accueil">Accueil</a>
+            <a href="#histoire">Histoire</a>
+            <a href="#produits">Produits</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="hero" id="accueil">
+            <div>
+                <div class="pill"><span class="dot"></span> Projet de stage · UX/UI + Développement web</div>
+                <h1>Site vitrine pour Schroeder Fleurs</h1>
+                <p>
+                    Ce projet a été réalisé dans le cadre de mon stage. L’objectif était de concevoir un site web clair,
+                    chaleureux et visuel pour présenter l’univers de la boutique, ses créations florales, son histoire,
+                    ses produits et ses informations de contact.
+                </p>
+                <div class="hero-actions">
+                    <a class="btn primary" href="#galerie">Voir les aperçus</a>
+                    <a class="btn secondary" href="index.html">Retour au portfolio</a>
+                </div>
+            </div>
+
+            <div class="hero-preview">
+                <img src="fleuriste-accueil.png" alt="Aperçu de la page d’accueil du site Schroeder Fleurs" />
+            </div>
+        </header>
+
+        <section class="section">
+            <div class="section-title">
+                <span>01</span>
+                <h2>Contexte et objectif</h2>
+            </div>
+            <p>
+                La page d’accueil est la porte d’entrée du site. Elle présente l’univers de la boutique : les bouquets,
+                les créations personnalisées, les plantes et les offres spéciales pour les occasions importantes.
+                Elle donne un premier aperçu chaleureux et visuel de ce que la boutique peut offrir, tout en invitant
+                le visiteur à explorer le reste du site.
+            </p>
+            <div class="cards-grid">
+                <div class="mini-card"><strong>Objectif</strong>
+                    <p>Créer une première impression forte, complète et rassurante.</p>
+                </div>
+                <div class="mini-card"><strong>Démarche</strong>
+                    <p>Allier esthétique florale, clarté de navigation et information utile.</p>
+                </div>
+                <div class="mini-card"><strong>Résultat</strong>
+                    <p>Un site vitrine cohérent, visuel et adapté à une boutique locale.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section two-cols" id="histoire">
+            <div class="image-card">
+                <img src="fleuriste-histoire.png" alt="Aperçu de la page histoire du site fleuriste" />
+            </div>
+            <div>
+                <div class="section-title">
+                    <span>02</span>
+                    <h2>Page Histoire</h2>
+                </div>
+                <p>
+                    La page Histoire raconte l’héritage familial de la boutique et met en avant son identité.
+                    Elle crée un lien humain avec les visiteurs grâce à des photos de l’intérieur du magasin,
+                    une présentation historique et des blocs visuels doux.
+                </p>
+            </div>
+        </section>
+
+        <section class="section two-cols reverse" id="produits">
+            <div>
+                <div class="section-title">
+                    <span>03</span>
+                    <h2>Page Produits</h2>
+                </div>
+                <p>
+                    La page Produits fonctionne comme une galerie de créations florales. Les bouquets et compositions
+                    sont présentés sous forme de cartes visuelles, avec une logique de consultation simple pour aider
+                    l’utilisateur à s’inspirer ou à trouver le bouquet adapté à une occasion.
+                </p>
+            </div>
+            <div class="image-card">
+                <img src="fleuriste-produits.png" alt="Aperçu de la page produits du site fleuriste" />
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <div class="section-title">
+                <span>04</span>
+                <h2>Page Contact</h2>
+            </div>
+            <p>
+                La page Contact regroupe les informations pratiques : horaires d’ouverture, tarifs de livraison,
+                adresse, téléphone, email et formulaire de contact. Sa structure est claire, aérée et pensée pour
+                permettre aux clients de poser une question ou de faire une demande de commande personnalisée.
+            </p>
+            <div class="cards-grid">
+                <div class="mini-card"><strong>Coordonnées</strong>
+                    <p>Adresse, téléphone et email accessibles rapidement.</p>
+                </div>
+                <div class="mini-card"><strong>Formulaire</strong>
+                    <p>Champs organisés pour faciliter les demandes client.</p>
+                </div>
+                <div class="mini-card"><strong>Livraison</strong>
+                    <p>Présentation claire des zones et tarifs de livraison.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="galerie">
+            <div class="section-title">
+                <span>05</span>
+                <h2>Aperçus visuels du projet</h2>
+            </div>
+            <p>
+                Ces captures montrent la structure générale du site : accueil, histoire, produits et contact.
+                Elles illustrent le travail réalisé sur la hiérarchie visuelle, les cartes, les couleurs douces,
+                les images florales et la cohérence graphique globale.
+            </p>
+
+            <div class="gallery">
+                <figure>
+                    <img src="fleuriste-accueil.png" alt="Page d’accueil du site fleuriste" />
+                    <figcaption>Page Accueil</figcaption>
+                </figure>
+                <figure>
+                    <img src="fleuriste-histoire.png" alt="Page histoire du site fleuriste" />
+                    <figcaption>Page Histoire</figcaption>
+                </figure>
+                <figure>
+                    <img src="fleuriste-produits.png" alt="Page produits du site fleuriste" />
+                    <figcaption>Page Produits</figcaption>
+                </figure>
+                <figure>
+                    <img src="fleuriste-contact.png" alt="Page contact du site fleuriste" />
+                    <figcaption>Page Contact</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">
+                <span>06</span>
+                <h2>Ce que ce projet m’a apporté</h2>
+            </div>
+            <div class="timeline">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div>
+                        <h3>Comprendre un besoin client réel</h3>
+                        <p>J’ai appris à traduire les attentes d’une boutique en structure de site claire et utilisable.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div>
+                        <h3>Structurer une expérience utilisateur</h3>
+                        <p>J’ai travaillé la navigation, les sections, les cartes, les blocs d’information et les appels
+                            à l’action.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div>
+                        <h3>Relier design et développement</h3>
+                        <p>J’ai conçu l’interface puis développé les pages en HTML, CSS et JavaScript.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-links">
+                <a class="btn primary" href="index.html">Retour au portfolio principal</a>
+                <a class="btn secondary" href="#accueil">Revenir en haut</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        Projet Fleuristerie · Portfolio Mohamed-Yamen EL TAHHAN
+    </footer>
+</body>
+
+</html>
